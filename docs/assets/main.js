@@ -21,5 +21,15 @@
         for (var i = 0; i < (lines.length - 1); i++) {
             $this.find('.gutter')[0].innerHTML += i+1 + '<br>'
         }
+        // var highlighter = {
+        //     js: (code) => {
+        //         // return code;
+        //         $this.html(code)
+        //     }
+        // }
+        // if ( $this.data('lang') == 'js' ) {
+        //     $this.html(highlighter.js(code))
+        //     // highlighter.js(code)
+        // }
     })
 }());
