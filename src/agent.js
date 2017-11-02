@@ -5,7 +5,7 @@ var Agent = function(){}
 Agent.prototype.getOs = function(e){
 	var av = navigator.appVersion,
 	nu = navigator.userAgent,
-	os = '',
+	os = 'unknown',
     clientStrings = [
         {s:'Windows 10', r:/(Windows 10.0|Windows NT 10.0)/},
         {s:'Windows 8.1', r:/(Windows 8.1|Windows NT 6.3)/},
@@ -143,6 +143,31 @@ Agent.prototype.cookieEnabled = function () {
 
 Agent.prototype.isTouchDevice = function () {
 	return 'ontouchstart' in window;
+};
+
+Agent.prototype.getBrowsingEngine = function () {
+	var nu = navigator.userAgent,
+	engine = 'unknown',
+	ver = '';
+
+	if ( window.opera ) {
+		engine = 'Opera';
+		ver = window.opera.version();
+	} else if ( /AppleWebKit\/(\S+)/.test(nu) ) {
+		engine = 'Webkit';
+		ver = RegExp["$1"];
+	} else if ( /KHTML\/(\S+)/.test(nu) ) {
+		engine = 'KHTML';
+		ver = RegExp["$1"];
+	} else if ( /MSIE ([^;]+)/.test(nu) ) {
+		engine = 'MSIE';
+		ver = RegExp["$1"];
+	}
+
+	return {
+		name: engine,
+		version: ver
+	};
 };
 
 if (typeof module != 'undefined' && module.exports && this.module !== module) {
