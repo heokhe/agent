@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Agent</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+        <meta name="theme-color" content="#3f51b5">
+        <link rel="stylesheet" href="dist/main.css">
+    </head>
+    <body>
+        <nav>
+            <div class="title">
+                Agent
+            </div>
+            <ul class="links">
+                <li><a href="javascript:void(0)">Download</a></li>
+                <li><a href="javascript:void(0)">Github</a></li>
+            </ul>
+        </nav>
+        <div class="header">
+            <span class="h1">
+                Agent <span style="opacity: .5">¬</span>
+            </span>
+            <div class="client-info" data-load-todo="this.innerHTML = navigator.userAgent">
+
+            </div>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1>Agent</h1>
+                Agent is a javascript tool for get clent's browser and OS information.
+                <h2>Get Started</h2>
+                First, Download it from <a href="#">GitHub</a> and then, Include it into your HTML.
+                <pre data-lang='js' class="pre">
+                    const myagent = new Agent();
+                    myagent.getOs(); //Returns Your OS
+                    myagent.getBrowser(); //Your browser
+                    myagent.isTouchDevice(); //detect device touch
+                </pre>
+            </div>
+        </div>
+    </body>
+    <script src="dist/jquery.min.js"></script>
+    <!-- <script src="dist/agent.min.js"></script> -->
+    <script src="dist/main.js"></script>
+</html>
