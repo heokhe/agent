@@ -1,2 +1,3 @@
 src/require.js
-src/index.html
+src/*.html
+*.txt

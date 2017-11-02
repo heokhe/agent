@@ -1,2 +1,2 @@
 # Agent
-Tool for getting client's device and browser information
+Agent is tool for getting your client's browser and system info.
