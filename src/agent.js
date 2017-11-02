@@ -142,7 +142,7 @@ Agent.prototype.cookieEnabled = function () {
 };
 
 Agent.prototype.isTouchDevice = function () {
-	return 'ontouchstart' in window || navigator.maxTouchPoints;
+	return 'ontouchstart' in window;
 };
 
 if (typeof module != 'undefined' && module.exports && this.module !== module) {
