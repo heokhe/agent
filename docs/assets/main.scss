@@ -58,16 +58,23 @@ h6{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $secondary;
+    background-color: $primary;
     color: #fff;
     font-weight: 500;
     line-height: 1.5;
-    height: 350px;
+    height: 410px;
     font-size: #{(4 / 2.8)}em;
     max-height: 100vh;
+    box-shadow: 0 2px 6px rgba(#000, .4);
     .h1{
         margin-left: -100px;
         display: block;
+    }
+    @media only screen and (max-width: 768px){
+        text-align: center;
+        .h1{
+            margin-left:0
+        }
     }
 }
 
@@ -77,11 +84,13 @@ a{
 }
 
 nav{
-    background-color: $primary;
     color: #fff;
     position: fixed;
     height: 60px;
-    box-shadow: 0 6px 29px -3px rgba(#000, .3);
+    &.raised{
+        background-color: $primary;
+        box-shadow: 0 6px 29px -3px rgba(#000, .3);
+    }
     left: 0;
     right: 0;
     display: flex;
@@ -89,7 +98,7 @@ nav{
     flex: 0;
     z-index: 5000;
     font-family: 'roboto mono';
-    padding: 0 15px;
+    padding: 0 calc(calc(60px - 18px) / 2);
     .title{
         font-size: 18px;
         width: 100%;
@@ -102,6 +111,9 @@ nav{
         li{
             padding: 0;
             display: inline-block;
+            &:not(:last-of-type){
+                margin-right: .7em;
+            }
             a{
                 color: #fff;
                 text-transform: uppercase;
@@ -109,10 +121,11 @@ nav{
                 position: relative;
                 height: 60px;
                 line-height: 60px;
+                transition: .2s cubic-bezier(.2,0,.4,1);
                 &::after{
+                    transition: inherit;
                     content: '';
-                    background-color: currentColor;
-                    color: inherit;
+                    background-color: $accent;
                     position: absolute;
                     bottom: 0;
                     right:0;
@@ -120,14 +133,17 @@ nav{
                     height: 2px;
                     transform: scaleX(0);
                     pointer-events: none;
-                    transition: .1s cubic-bezier(.2,0,.4,1);
                 }
-                margin: 0 5px;
                 font-size: 14px;
                 &:hover, &:focus{
+                    color: $accent;
                     &::after{
-                        transition-timing-function: cubic-bezier(1,0,0,0);
                         transform: scaleX(1);
+                    }
+                }
+                &:active{
+                    &::after{
+                        height: 4px;
                     }
                 }
             }
@@ -137,7 +153,7 @@ nav{
 
 .container{
     width: 100%;
-    padding: 15px 0;
+    padding: 0 20px;
     margin: 30px auto;
     @media only screen and (min-width: 768px){
         width: (8/12*100%);
@@ -161,7 +177,7 @@ pre, code{
     border-radius: 2px;
     border: 1px solid #bbb;
     white-space: pre-line;
-    padding: 0 5px 0 35px;
+    padding: 0 5px 0 calc(3em + 5px);
     position: relative;
     box-shadow: 0 3px 5px -1px rgba(#000, .4);
     overflow: hidden;
@@ -170,12 +186,20 @@ pre, code{
         left: 0;
         top: 0;
         bottom: 0;
-        width: 30px;
+        width: 2.5em;
         text-align: left;
         background-color: #fff;
         color: $primary;
         box-shadow: 2px 0 2px rgba(#000, .15);
-        padding-left: 5px;
+        .line{
+            display: block;
+            padding: 0 0 0 5px;
+            white-space: nowrap;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 }
 
@@ -197,4 +221,14 @@ pre, code{
 
 .syntax-string{
     color: $syntax-string
+}
+
+code{
+    color: darken($syntax-function, 10%);
+    vertical-align: middle;
+    font-weight: 500;
+    background-color: lighten($syntax-function, 23%);
+    padding: .2em .4em;
+    font-size: 90%;
+    border-radius: 2px;
 }

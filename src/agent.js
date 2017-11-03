@@ -170,6 +170,21 @@ Agent.prototype.getBrowsingEngine = function () {
 	};
 };
 
+Agent.prototype.pixelRatio = function () {
+	return window.devicePixelRatio;
+};
+
+Agent.prototype.screen = function () {
+	return {
+		width: screen.width,
+		height: screen.height
+	};
+};
+
+Agent.prototype.$_VERSION = function () {
+	return '1.0.0';
+};
+
 if (typeof module != 'undefined' && module.exports && this.module !== module) {
 	module.exports = Agent;
 } else if (typeof define === 'function' && define.amd) {

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>Agent</title>
         <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-        <meta name="theme-color" content="#3f51b5">
+        <meta name="theme-color" content="#ff5722">
         <link rel="stylesheet" href="assets/main.css">
     </head>
     <body>
@@ -14,29 +14,61 @@
             </div>
             <ul class="links">
                 <li><a href="javascript:void(0)">Download</a></li>
-                <li><a href="javascript:void(0)">Github</a></li>
+                <li><a href="https://github.com/hkh12/agent" target="_blank">Github</a></li>
             </ul>
         </nav>
         <div class="header">
             <span class="h1">
-                Agent <span style="opacity: .5">¬</span>
+                Agent<span style="opacity: .5; margin-left: .4em">¬</span>
             </span>
-            <div class="client-info" data-load-todo="this.innerHTML = navigator.userAgent">
-
-            </div>
         </div>
         <div class="container">
             <div class="main">
-                <h1>Agent</h1>
-                Agent is a javascript tool for get clent's browser and OS information.
+                <h1>About agent.js</h1>
+                Agent is a javascript tool for get client's browser and OS information.
                 <h2>Get Started</h2>
-                First, Download it from <a href="#">GitHub</a> and then, Include it into your HTML.
+                First, Download it from
+                <a href='https://github.com/Hkh12/agent/'>GitHub</a>.
+                then, Include it into your HTML.
+                <pre data-lang='html' class="pre">
+                    &lt;script src="agent.min.js"&gt;&lt;/script&gt;
+                </pre>
+                Or, Get it from <a href="https://rawgit.com">RawGit</a>.
+                <pre data-lang='html' class="pre">
+                    &lt;!-- Use this for production --&gt;
+                    &lt;script src="https://cdn.rawgit.com/Hkh12/agent/86c1ca8a/src/agent.min.js"&gt;&lt;/script&gt;
+
+                    &lt;!-- Use this for development --&gt;
+                    &lt;script src="https://rawgit.com/Hkh12/agent/master/src/agent.min.js"&gt;&lt;/script&gt;
+                </pre>
+                <div class="h2">
+                    How To Use
+                </div>
+                Start the work like this:
                 <pre data-lang='js' class="pre">
                     const myagent = new Agent();
-                    myagent.getOs(); //Returns Your OS
-                    myagent.getBrowser(); //Your browser
-                    myagent.isTouchDevice(); //detect device touch
                 </pre>
+                Now, You can see all information in <code>myagent</code> variable.
+                <pre class="pre" data-lang='js'>
+                    //operating system (object, name and version)
+                    myagent.getOs()
+                    //browser (object, name and version)
+                    myagent.getBrowser()
+                    //browser engine (object, name and version)
+                    myagent.getBrowsingEngine()
+                    //mobile (boolean)
+                    myagent.isMobile()
+                    //touch device (boolean)
+                    myagent.isTouchDevice()
+                    //cookies enabled (boolean)
+                    myagent.cookieEnabled()
+                    //screen info (object, width and height)
+                    myagent.screen()
+                </pre>
+                <h3>Contribute</h3>
+                If you found any bugs or you had any issue with agent, report it via
+                <a href="https://github.com/hkh12/agent/issues" target="_blank">issues page</a>.
+                Contributing in this project is free!
             </div>
         </div>
     </body>
