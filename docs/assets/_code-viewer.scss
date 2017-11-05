@@ -1,0 +1,85 @@
+$cw-bg: #263238;
+$cw-color: #fff;
+$cw-odd-line-bg: lighten($cw-bg, 1%);
+$cw-border-color: transparent;
+$gutter-bg: lighten($cw-bg, 5%);
+$gutter-color: $accent;
+$syntax-keyword: #BA68C8;
+$syntax-decvar: #4DB6AC;
+$syntax-function: #E57373;
+$syntax-string: #69f0ae;
+$syntax-comment: $cw-bg*2.78547;
+
+.pre{
+    color: $cw-color;
+    background-color: $cw-bg;
+    line-height: 1.5;
+    overflow: hidden;
+    font-size: 12pt;
+    border-radius: 2px;
+    white-space: pre-line;
+    border: 1px solid $cw-border-color;
+    position: relative;
+    box-shadow: 0 2px 5px -1px rgba(#000, .55);
+    .line{
+        display: table;
+        width: 100%;
+        max-width: 100%;
+        &:nth-child(odd):not(:only-of-type){
+            background-color: $cw-odd-line-bg;
+        }
+        .code{
+            display: table-cell;
+            width: 100%;
+            white-space: pre-line;
+            word-wrap: break-word;
+            word-break: break-all;
+            padding: 0 5px;
+        }
+        .index{
+            // min-width: 30px;
+            display: table-cell;
+            padding-right: 5px;
+            text-align: right;
+            min-width: 50px;
+            box-shadow: inset -6px 0 3px -5px rgba(#000, .25);
+            background-color: $gutter-bg;
+            color: $gutter-color;
+            max-width: 50px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+}
+
+.syntax-decvar{
+    color: $syntax-decvar
+}
+
+.syntax-keyword{
+    color: $syntax-keyword;
+}
+
+.syntax-function{
+    color: $syntax-function
+}
+
+.syntax-comment{
+    color: $syntax-comment;
+    font-style: italic;
+}
+
+.syntax-string{
+    color: $syntax-string
+}
+
+code{
+    color: darken($secondary, 23%);
+    vertical-align: middle;
+    font-weight: 500;
+    background-color: lighten($secondary, 23%);
+    padding: .2em .4em;
+    font-size: 90%;
+    border-radius: 2px;
+}

@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <title>Agent</title>
         <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-        <meta name="theme-color" content="#ff5722">
         <link rel="stylesheet" href="assets/main.css">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
     </head>
     <body>
         <nav>
@@ -13,14 +13,34 @@
                 Agent
             </div>
             <ul class="links">
-                <li><a href="javascript:void(0)">Download</a></li>
+                <li><a href="assets/agent.min.js" download='agent.min.js'>Download</a></li>
                 <li><a href="https://github.com/hkh12/agent" target="_blank">Github</a></li>
             </ul>
         </nav>
         <div class="header">
             <span class="h1">
-                Agent<span style="opacity: .5; margin-left: .4em">¬</span>
+                Agent<span style="opacity: .5; margin-left: 4px">¬</span>
             </span>
+            <div class="clinfo">
+                <div class="info-part active">
+                    OS: <span data-collect-info='getOs => name'></span>
+                    - <span data-collect-info='getOs => version'></span>
+                </div>
+                <div class="info-part">
+                    Browser: <span data-collect-info='getBrowser => name'></span>
+                    - <span data-collect-info='getBrowser => version'></span>
+                </div>
+                <div class="info-part">
+                    Browser engine: <span data-collect-info='getBrowsingEngine => name'></span>
+                    - <span data-collect-info='getBrowsingEngine => version'></span>
+                </div>
+                <div class="info-part">
+                    Screen: <span data-collect-info='screen => width'></span>x<span data-collect-info='screen => height'></span>
+                </div>
+                <div class="info-part">
+                    Pixel Ratio: <span data-collect-info='pixelRatio'></span>
+                </div>
+            </div>
         </div>
         <div class="container">
             <div class="main">
@@ -28,8 +48,8 @@
                 Agent is a javascript tool for get client's browser and OS information.
                 <h2>Get Started</h2>
                 First, Download it from
-                <a href='https://github.com/Hkh12/agent/'>GitHub</a>.
-                then, Include it into your HTML.
+                <a href="https://github.com/hkh12/agent" target="_blank">here</a>. (3.7 KB minified)<br>
+                then, Include it into your HTML:
                 <pre data-lang='html' class="pre">
                     &lt;script src="agent.min.js"&gt;&lt;/script&gt;
                 </pre>
@@ -37,7 +57,6 @@
                 <pre data-lang='html' class="pre">
                     &lt;!-- Use this for production --&gt;
                     &lt;script src="https://cdn.rawgit.com/Hkh12/agent/86c1ca8a/src/agent.min.js"&gt;&lt;/script&gt;
-
                     &lt;!-- Use this for development --&gt;
                     &lt;script src="https://rawgit.com/Hkh12/agent/master/src/agent.min.js"&gt;&lt;/script&gt;
                 </pre>
@@ -46,9 +65,9 @@
                 </div>
                 Start the work like this:
                 <pre data-lang='js' class="pre">
-                    const myagent = new Agent();
+                    var myagent = new Agent();
                 </pre>
-                Now, You can see all information in <code>myagent</code> variable.
+                Now, You can see all things in <code>myagent</code> variable.
                 <pre class="pre" data-lang='js'>
                     //operating system (object, name and version)
                     myagent.getOs()
@@ -64,6 +83,11 @@
                     myagent.cookieEnabled()
                     //screen info (object, width and height)
                     myagent.screen()
+					//device pixel ratio (number)
+					myagent.pixelRatio()
+					
+					//current `agent.min.js` version
+					myagent.$_VERSION()
                 </pre>
                 <h3>Contribute</h3>
                 If you found any bugs or you had any issue with agent, report it via
@@ -71,8 +95,13 @@
                 Contributing in this project is free!
             </div>
         </div>
+        <footer class="footer">
+            Made with <span class="red-text">&hearts;</span> by
+            <a href="https://github.com/hkh12/" target="_blank">@hkh12</a><br>
+            <small>Github page by me</small>
+        </footer>
     </body>
     <script src="assets/jquery.min.js"></script>
-    <!-- <script src="dist/agent.min.js"></script> -->
+    <script src="assets/agent.min.js"></script>
     <script src="assets/main.js"></script>
 </html>

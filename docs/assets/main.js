@@ -6,9 +6,59 @@
         } else {
             $('nav').removeClass('raised')
         }
+        if ( $(this).scrollTop() > $('.header')[0].offsetHeight - 105 ) {
+            $('.clinfo').addClass('hidden')
+        } else {
+            $('.clinfo').removeClass('hidden')
+        }
     }
+    todo()
     $(window).scroll(todo)
-    $(document).ready(todo)
+
+    const ghpa = new Agent();
+
+    $('[data-collect-info]').each(function () {
+        var $this = $(this),
+        text = $this.data('collect-info');
+        text = text.split(' => ');
+        if ( text.length == 1 ) {
+            text = text.join();
+            $this.html( ghpa[text]() )
+        } else if ( text.length == 2 ) {
+            const method = text[0],
+            result = text[1];
+            var a = ghpa[method]();
+            var final = a[result] !== '' ? a[result] : 'Unknown';
+
+            $this.html( final );
+        }
+    })
+
+    $('.clinfo').each(function () {
+        var clinfo = $(this),
+        item = clinfo.find('.info-part'),
+        activeItem = clinfo.find('.info-part.active'),
+        activeIndex = item.index(activeItem);
+
+        clinfo.attr('data-mode', 1).click(function (e) {
+            if (e.button == 2) {
+                return false;
+            }
+
+            activeIndex++;
+
+            if ( activeIndex == item.length ){
+                activeIndex = 0;
+            }
+
+            clinfo.attr('data-mode', activeIndex + 1)
+
+            item.eq(activeIndex).addClass('active')
+            item.eq(activeIndex - 1).removeClass('active')
+        })
+
+    })
+
     $('[data-lang]').each(function(){
         var $this = $(this),
         code = $this.text();
@@ -36,10 +86,14 @@
             },
             gutter: function () {
                 var lines = code.split(/\n/);
-                $this.prepend('<div class="gutter"></div>')
+                $this.html('')
+                // $this.prepend('<div class="gutter"></div>')
+                // for (var i = 0; i < (lines.length - 1); i++) {
+                //     $this.find('.gutter').append('<div class="line" title="Line ' + (i+1) + '">' + (i+1) + '</div>')
+                // }
                 for (var i = 0; i < (lines.length - 1); i++) {
-                    $this.find('.gutter').append('<div class="line" title="Line ' + (i+1) + '">' + (i+1) + '</div>')
-                }
+                    $('<div class="line"><div class="code">' + lines[i] + '</div></div>').appendTo($this).prepend('<div class="index" title="Line ' + (i+1) +'">' + (i+1) + '</div>')
+                };
             }
         }
         function get_keywords(str){

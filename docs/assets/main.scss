@@ -1,9 +1,16 @@
 @import "_data";
+@import "_code-viewer";
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,500|Roboto:300,400,700');
+
+@mixin us {
+    cursor: default;
+    user-select: none;
+}
 
 *{
     -webkit-tap-highlight-color: transparent;
     box-sizing: border-box;
+    outline: none !important
 }
 
 body{
@@ -60,12 +67,13 @@ h6{
     justify-content: center;
     background-color: $primary;
     color: #fff;
+    @include us;
     font-weight: 500;
     line-height: 1.5;
     height: 410px;
     font-size: #{(4 / 2.8)}em;
     max-height: 100vh;
-    box-shadow: 0 2px 6px rgba(#000, .4);
+    box-shadow: 0 6px 29px -3px rgba(#000, .3);
     .h1{
         margin-left: -100px;
         display: block;
@@ -76,25 +84,115 @@ h6{
             margin-left:0
         }
     }
+    position: relative;
+    .clinfo{
+        position: absolute;
+        bottom: 0;
+        height: 60px;
+        &.hidden{
+            opacity: 0;
+            max-width: 60px;
+            .info-part{
+                // letter-spacing: -.6em;
+                // font-size: 0;
+                line-height: 150px;
+            }
+            pointer-events: none;
+        }
+        width: calc(100vw - 30px);
+        max-width: 720px;
+        line-height: 60px;
+        text-align: center;
+        bottom: -30px;
+        box-shadow: inherit;
+        @for $i from 1 through 5{
+            &[data-mode='#{$i}']{
+                // $point: 255/4 * ($i - 1);
+                // $point2: 255 / $i;
+                $red: red($secondary);
+                $green: green($secondary);
+                $blue: blue($secondary);
+                $color: lighten(desaturate(rgb($red, $green, $blue), 0%), $i*3.548554%);
+                background-color: $color;
+                 @if lightness($color) > 0 {
+                     .info-part{
+                         color: darken($color, 30%)
+                     }
+                 }
+            }
+        }
+        transition: all .3s ease, opacity .6s ease-out;
+        .info-part{
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            padding: 0 8px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right:0;
+            bottom: 0;
+            z-index: 3;
+            transition-duration: inherit;
+            transition-timing-function: cubic-bezier(.2, 0, .4, 1);
+            transition-property: all;
+            &.active{
+                transform: translate(0);
+            }
+            transform: translateY(100%);
+        }
+        overflow: hidden;
+        border-radius: 1000vw;
+    }
 }
 
 a{
     text-decoration: none;
     color: $secondary;
+    &:hover, &:focus{
+        color: darken($secondary, 5%);
+    }
+    &:active{
+        color: darken($secondary, 10%)
+    }
 }
 
 nav{
     color: #fff;
     position: fixed;
     height: 60px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    @include us;
     &.raised{
+        .title{
+            letter-spacing: normal;
+            opacity: 1;
+            transition-duration: .5s;
+        }
         background-color: $primary;
         box-shadow: 0 6px 29px -3px rgba(#000, .3);
     }
+    &:not(.raised){
+        .links{
+            li{
+                a{
+                    color: $accent;
+                    // &:hover, &:focus{
+                    //     color: lighten($secondary, 15%)
+                    // }
+                    // &::after{
+                    //     background-color: lighten($secondary, 15%)
+                    // }
+                }
+            }
+        }
+    }
     left: 0;
     right: 0;
-    display: flex;
-    align-items: center;
     flex: 0;
     z-index: 5000;
     font-family: 'roboto mono';
@@ -103,6 +201,10 @@ nav{
         font-size: 18px;
         width: 100%;
         font-weight: 500;
+        transition: .2s cubic-bezier(.2,0,.4,1);
+        // transform: translateY(-60px);
+        letter-spacing: -.75em;
+        opacity: 0
     }
     .links{
         margin: 0;
@@ -168,67 +270,20 @@ pre, code{
     font-family: 'roboto mono';
 }
 
-.pre{
+footer.footer{
     background-color: #fff;
-    line-height: 1.5;
-    font-size: 14px;
-    background-image: linear-gradient(to bottom, rgba(#000, .03) 50%, transparent 50%);
-    background-size: 100% 42px;
-    border-radius: 2px;
-    border: 1px solid #bbb;
-    white-space: pre-line;
-    padding: 0 5px 0 calc(3em + 5px);
-    position: relative;
-    box-shadow: 0 3px 5px -1px rgba(#000, .4);
-    overflow: hidden;
-    .gutter{
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 2.5em;
-        text-align: left;
-        background-color: #fff;
-        color: $primary;
-        box-shadow: 2px 0 2px rgba(#000, .15);
-        .line{
-            display: block;
-            padding: 0 0 0 5px;
-            white-space: nowrap;
-            width: 100%;
-            max-width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    }
-}
-
-.syntax-decvar{
-    color: $syntax-decvar
-}
-
-.syntax-keyword{
-    color: $syntax-keyword
-}
-
-.syntax-function{
-    color: $syntax-function
-}
-
-.syntax-comment{
-    color: gray
-}
-
-.syntax-string{
-    color: $syntax-string
-}
-
-code{
-    color: darken($syntax-function, 10%);
-    vertical-align: middle;
+    box-shadow: 0 -6px 29px -3px rgba(#000, .2);
+    padding: 15px 20px;
+    text-align: center;
+    font-family: 'roboto mono';
     font-weight: 500;
-    background-color: lighten($syntax-function, 23%);
-    padding: .2em .4em;
-    font-size: 90%;
-    border-radius: 2px;
+    font-size: 20px;
+    small{
+        font-size: 65%
+    }
+    letter-spacing: .15em;
+}
+
+.red-text{
+    color: #f44336;
 }

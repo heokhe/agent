@@ -1,8 +1,8 @@
 'use strict';
 
-var Agent = function(){}
+const Agent = function(){}
 
-Agent.prototype.getOs = function(e){
+Agent.prototype.getOs = function(){
 	var av = navigator.appVersion,
 	nu = navigator.userAgent,
 	os = 'unknown',
@@ -70,9 +70,7 @@ Agent.prototype.getOs = function(e){
 	};
 }
 
-Agent.prototype.isMobile = function() {
-	return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-};
+Agent.prototype.isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 
 Agent.prototype.getBrowser = function () {
 	var av = navigator.appVersion,
@@ -137,13 +135,9 @@ Agent.prototype.getBrowser = function () {
 
 };
 
-Agent.prototype.cookieEnabled = function () {
-	return navigator.cookieEnabled ? true : false;
-};
+Agent.prototype.cookieEnabled = navigator.cookieEnabled ? true : false;
 
-Agent.prototype.isTouchDevice = function () {
-	return 'ontouchstart' in window;
-};
+Agent.prototype.isTouchDevice = ('ontouchstart' in window);
 
 Agent.prototype.getBrowsingEngine = function () {
 	var nu = navigator.userAgent,
@@ -170,20 +164,23 @@ Agent.prototype.getBrowsingEngine = function () {
 	};
 };
 
-Agent.prototype.pixelRatio = function () {
-	return window.devicePixelRatio;
-};
+Agent.prototype.pixelRatio = window.devicePixelRatio;
 
-Agent.prototype.screen = function () {
-	return {
+Agent.prototype.screen = {
 		width: screen.width,
 		height: screen.height
-	};
 };
 
-Agent.prototype.$_VERSION = function () {
-	return '1.0.0';
-};
+Agent.prototype.screenOrientation = function(){
+	var o = window.screen.orientation,
+	result = 'Unknown';
+	var reg = [/portait/i, /landscape/i];
+	for (var i = 0; i > reg.length; i++) {
+		
+	}
+}
+
+Agent.prototype.$_VERSION = '1.0.0';
 
 if (typeof module != 'undefined' && module.exports && this.module !== module) {
 	module.exports = Agent;
