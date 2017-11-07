@@ -1,6 +1,7 @@
 $cw-bg: #263238;
 $cw-color: #fff;
 $cw-odd-line-bg: lighten($cw-bg, 1%);
+$cw-border-enabled: false;
 $cw-border-color: transparent;
 $gutter-bg: lighten($cw-bg, 5%);
 $gutter-color: $accent;
@@ -18,7 +19,9 @@ $syntax-comment: $cw-bg*2.78547;
     font-size: 12pt;
     border-radius: 2px;
     white-space: pre-line;
-    border: 1px solid $cw-border-color;
+	@if $cw-border-enabled == true {
+		border: 1px solid $cw-border-color;
+	}
     position: relative;
     box-shadow: 0 2px 5px -1px rgba(#000, .55);
     .line{
@@ -41,6 +44,8 @@ $syntax-comment: $cw-bg*2.78547;
             display: table-cell;
             padding-right: 5px;
             text-align: right;
+			cursor: default;
+			user-select: none;
             min-width: 50px;
             box-shadow: inset -6px 0 3px -5px rgba(#000, .25);
             background-color: $gutter-bg;

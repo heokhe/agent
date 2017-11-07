@@ -172,12 +172,15 @@ Agent.prototype.screen = {
 };
 
 Agent.prototype.screenOrientation = function(){
-	var o = window.screen.orientation,
-	result = 'Unknown';
-	var reg = [/portait/i, /landscape/i];
-	for (var i = 0; i > reg.length; i++) {
-		
-	}
+	var o = window.screen.orientation.type,
+	result = '';
+	if (/portrait/i.test(o)){
+		result = 'Portrait'
+	} else if (/landscape/i.test(o)) {
+		result = 'Landscape'
+	};
+	
+	return result;
 }
 
 Agent.prototype.$_VERSION = '1.0.0';
